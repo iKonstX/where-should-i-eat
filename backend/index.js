@@ -4,6 +4,13 @@ const ax = require('axios')
 const express = require('express');
 const app = express();
 
+app.use(express.static(__dirname + '../dist/where-should-i-eat'));
+
+app.get('/*', function (req, res) {
+
+    res.sendFile(path.join(__dirname + '/dist/where-should-i-eat/index.html'));
+});
+
 app.get('/places', function (req, res) {
 
     const filters = { ...req.query };
