@@ -1,0 +1,5 @@
+<agm-map *ngIf="this.restaurants.length != 0" [latitude]="location.lat" [longitude]="location.lng">
+  <agm-marker [latitude]="selectedRestaurant.geometry.lat" [longitude]="selectedRestaurant.geometry.lng" [label]="'M'">
+  </agm-marker>
+</agm-map>
+<app-spinner *ngIf="this.restaurants.length == 0"></app-spinner>

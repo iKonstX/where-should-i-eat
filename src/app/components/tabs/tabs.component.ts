@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from '../../services/location.service'
 
 @Component({
   selector: 'app-tabs',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private locationService: LocationService) { }
 
   ngOnInit() {
+
   }
+  ngAfterViewInit() {
+  }
+
 
 }

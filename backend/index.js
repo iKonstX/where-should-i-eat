@@ -5,7 +5,15 @@ const express = require('express');
 const app = express();
 
 app.get('/places', function (req, res) {
-    ax.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=35.6590242,139.7217861&radius=5000&key=${process.env.GMAP_API_KEY}&type=restaurant`)
+
+    const filters = { ...req.query };
+    console.log(filters)
+    ax.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=35.6590242,139.7217861&&key=${process.env.GMAP_API_KEY}&type=restaurant`,
+        {
+            params: {
+                ...filters
+            }
+        })
         .then((response) => {
             res.json(response.data.results)
         })
