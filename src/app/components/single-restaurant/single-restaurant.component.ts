@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription, Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { setRestaurants } from 'src/app/states/location.actions';
 
 @Component({
   selector: 'app-single-restaurant',
@@ -6,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./single-restaurant.component.css']
 })
 export class SingleRestaurantComponent implements OnInit {
-
-  constructor() { }
+  state$: any;
+  constructor(private store: Store<{ state: any }>) {
+    this.store.subscribe((val) => {
+      this.state$ = val.state
+    });
+  }
 
   ngOnInit() {
   }

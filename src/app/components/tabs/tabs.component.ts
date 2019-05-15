@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../../services/location.service'
+import { Subscription, Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { setRestaurants } from 'src/app/states/location.actions';
 
 @Component({
   selector: 'app-tabs',
@@ -7,8 +10,12 @@ import { LocationService } from '../../services/location.service'
   styleUrls: ['./tabs.component.css']
 })
 export class TabsComponent implements OnInit {
-
-  constructor(private locationService: LocationService) { }
+  state$: any;
+  constructor(private store: Store<{ state: any }>) {
+    this.store.subscribe((val) => {
+      this.state$ = val.state
+    });
+  }
 
   ngOnInit() {
 

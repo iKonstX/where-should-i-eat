@@ -16,9 +16,9 @@ export class LocationService {
     });
   }
 
-  public getCurrentLocation(): any {
+  public async getCurrentLocation() {
     if (navigator.geolocation) {
-      return navigator.geolocation.getCurrentPosition((response) => {
+      return await navigator.geolocation.getCurrentPosition((response) => {
         this.store.dispatch(new setCurrentLocation({
           location: {
             lat: response.coords.latitude,

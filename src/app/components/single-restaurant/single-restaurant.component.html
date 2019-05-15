@@ -1,5 +1,17 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <span>First Row</span>
+    <span>{{state$.selectedRestaurant.name || async}}</span>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-list>
+  <h3 mat-subheader>Address</h3>
+  <mat-list-item>{{state$.selectedRestaurant.address || async}}
+  </mat-list-item>
+  <h3 mat-subheader>How to get there</h3>
+  <mat-list-item>
+    <a mat-raised-button
+      href="https://www.google.com/maps/dir/?api=1&destination={{state$.selectedRestaurant.geometry.lat}},{{state$.selectedRestaurant.geometry.lng}}"
+      target="_blank">Route</a>
+  </mat-list-item>
+</mat-list>

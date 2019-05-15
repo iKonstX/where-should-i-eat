@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 
 export enum ActionTypes {
-    setRestaurants = '[Counter Component] setRestaurants',
-    setCurrentLocation = '[Counter Component] setCurrentLocation',
-    Reset = '[Counter Component] Reset',
+    setRestaurants = '[Location Service] setRestaurants',
+    setCurrentLocation = '[Location Service] setCurrentLocation',
+    setSelectedRestaurant = '[Location Service] setSelectedRestaurant',
 }
 
 export class setRestaurants implements Action {
@@ -18,10 +18,13 @@ export class setCurrentLocation implements Action {
     constructor(public payload: { location: any }) { }
 }
 
-export class Reset implements Action {
-    readonly type = ActionTypes.Reset;
+export class setSelectedRestaurant implements Action {
+    readonly type = ActionTypes.setSelectedRestaurant;
+
+    constructor(public payload: { restaurant: any }) { }
 }
 
 export type Actions =
     | setRestaurants
     | setCurrentLocation
+    | setSelectedRestaurant

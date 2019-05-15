@@ -16,6 +16,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 import { MapComponent } from './components/map/map.component';
 import { SingleRestaurantComponent } from './components/single-restaurant/single-restaurant.component';
 
@@ -39,7 +40,8 @@ import { SingleRestaurantComponent } from './components/single-restaurant/single
     MatListModule,
     HttpClientModule,
     MatToolbarModule,
-    StoreModule.forRoot({ state: counterReducer })
+    StoreModule.forRoot({ state: counterReducer }),
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

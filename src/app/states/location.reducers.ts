@@ -17,12 +17,17 @@ interface IRestaurants {
 export const initialState = {
     location: {},
     restaurants: [],
+    selectedRestaurant: {}
 };
 
 export function counterReducer(state = initialState, action: Actions) {
     switch (action.type) {
         case ActionTypes.setRestaurants: {
             state.restaurants.push(action.payload.restaurants);
+            return state;
+        }
+        case ActionTypes.setSelectedRestaurant: {
+            state.selectedRestaurant = action.payload.restaurant;
             return state;
         }
         case ActionTypes.setCurrentLocation: {

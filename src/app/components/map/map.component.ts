@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../../services/location.service'
 import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { setRestaurants } from 'src/app/states/location.actions';
+import { setRestaurants, setSelectedRestaurant } from 'src/app/states/location.actions';
 
 interface ILocation {
   lat: number;
@@ -32,9 +32,7 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.store.subscribe((val) => {
       this.state$ = val.state
-      console.log(this.state$)
     });
-    console.log(this.state$)
     this.loadMap()
   }
 
@@ -60,9 +58,7 @@ export class MapComponent implements OnInit {
     const restaurantSize = this.state$.restaurants.length;
     const pickRestaurant = Math.floor(Math.random() * restaurantSize) + 1;
 
-    this.selectedRestaurant = this.state$.restaurants[pickRestaurant - 1]
-
-    console.log(this.selectedRestaurant)
+    this.store.dispatch(new setSelectedRestaurant({ restaurant: this.state$.restaurants[pickRestaurant - 1] }))
   }
 
 }
