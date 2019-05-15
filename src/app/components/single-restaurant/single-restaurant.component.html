@@ -1,12 +1,12 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <span>{{state$.selectedRestaurant.name || async}}</span>
+    <span>state$.selectedRestaurant.name</span>
   </mat-toolbar-row>
 </mat-toolbar>
 
 <mat-list>
   <h3 mat-subheader>Address</h3>
-  <mat-list-item>{{state$.selectedRestaurant.address || async}}
+  <mat-list-item>state$.selectedRestaurant.address
   </mat-list-item>
   <h3 mat-subheader>How to get there</h3>
   <mat-list-item>
