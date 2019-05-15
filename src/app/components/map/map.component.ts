@@ -30,11 +30,10 @@ export class MapComponent implements OnInit {
 
 
   ngOnInit() {
-    this.state$ =
-      this.store.subscribe((val) => {
-        this.state$ = val.state
-        console.log("yet")
-      });
+    this.store.subscribe((val) => {
+      this.state$ = val.state
+      console.log(this.state$)
+    });
     console.log(this.state$)
     this.loadMap()
   }
