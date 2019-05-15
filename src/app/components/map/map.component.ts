@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../../services/location.service'
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { setRestaurants } from 'src/app/states/location.actions';
 
 interface ILocation {
   lat: number;
@@ -21,18 +23,19 @@ interface IRestaurants {
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  public location: ILocation = { lat: 0, lng: 0 };
-  public restaurants: IRestaurants[] = [];
-  public selectedRestaurant: IRestaurants;
-  public subscription: Subscription;
-  constructor(private locationService: LocationService) {
-
+  selectedRestaurant: any;
+  state$: any;
+  constructor(private locationService: LocationService, private store: Store<{ state: any }>) {
   }
 
 
   ngOnInit() {
-    this.subscription = this.locationService.location$
-      .subscribe(location => this.location = location)
+    this.state$ =
+      this.store.subscribe((val) => {
+        this.state$ = val.state
+        console.log("yet")
+      });
+    console.log(this.state$)
     this.loadMap()
   }
 
@@ -40,23 +43,25 @@ export class MapComponent implements OnInit {
     this.locationService.getCurrentLocation();
     this.locationService.loadRestaurants().subscribe((res: any) => {
       res.forEach((restaurant: any) => {
-        this.restaurants.push({
-          geometry: restaurant.geometry.location,
-          icon: restaurant.icon,
-          name: restaurant.name,
-          isOpen: restaurant.opening_hours,
-          address: restaurant.vicinity
-        })
+        this.store.dispatch(new setRestaurants({
+          restaurants: {
+            geometry: restaurant.geometry.location,
+            icon: restaurant.icon,
+            name: restaurant.name,
+            isOpen: restaurant.opening_hours,
+            address: restaurant.vicinity
+          }
+        }));
       })
       this.selectRandomRestaurant();
     });
   }
 
-  public selectRandomRestaurant(coords: IRestaurants[] = this.restaurants) {
-    const restaurantSize = this.restaurants.length;
+  public selectRandomRestaurant() {
+    const restaurantSize = this.state$.restaurants.length;
     const pickRestaurant = Math.floor(Math.random() * restaurantSize) + 1;
 
-    this.selectedRestaurant = this.restaurants[pickRestaurant - 1]
+    this.selectedRestaurant = this.state$.restaurants[pickRestaurant - 1]
 
     console.log(this.selectedRestaurant)
   }

@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './states/location.reducers';
+
 import { AppComponent } from './app.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
@@ -12,7 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MapComponent } from './components/map/map.component';
+import { SingleRestaurantComponent } from './components/single-restaurant/single-restaurant.component';
 
 
 @NgModule({
@@ -20,7 +25,8 @@ import { MapComponent } from './components/map/map.component';
     AppComponent,
     TabsComponent,
     SpinnerComponent,
-    MapComponent
+    MapComponent,
+    SingleRestaurantComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,9 @@ import { MapComponent } from './components/map/map.component';
     MatTabsModule,
     MatProgressSpinnerModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    StoreModule.forRoot({ state: counterReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
