@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../../services/location.service'
 import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { setRestaurants, setSelectedRestaurant } from 'src/app/states/location.actions';
+import { setRestaurants, setSelectedRestaurant } from 'src/app/states/location/location.actions';
 
 interface ILocation {
   lat: number;
@@ -25,13 +25,13 @@ interface IRestaurants {
 export class MapComponent implements OnInit {
   selectedRestaurant: any;
   state$: any;
-  constructor(private locationService: LocationService, private store: Store<{ state: any }>) {
+  constructor(private locationService: LocationService, private store: Store<{ locationState: any }>) {
   }
 
 
   ngOnInit() {
     this.store.subscribe((val) => {
-      this.state$ = val.state
+      this.state$ = val.locationState
     });
     this.loadMap()
   }

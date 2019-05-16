@@ -2,13 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './states/location.reducers';
-
-import { AppComponent } from './app.component';
-import { TabsComponent } from './components/tabs/tabs.component';
-import { SpinnerComponent } from './components/spinner/spinner.component';
-
 //3rd party
 import { AgmCoreModule } from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +10,27 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+
+
+// States
+import { StoreModule } from '@ngrx/store';
+import { ActionReducerMap } from "@ngrx/store";
+import * as location from './states/location/location.reducers';
+import * as setup from './states/setup/setup.reducers';
+
+interface AppState {
+  locationState: location.LocationState;
+  setupState: setup.SetupState;
+}
+
+const reducers: ActionReducerMap<AppState> = {
+  locationState: location.reducer,
+  setupState: setup.reducer
+};
+
+import { AppComponent } from './app.component';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MapComponent } from './components/map/map.component';
 import { SingleRestaurantComponent } from './components/single-restaurant/single-restaurant.component';
 
@@ -40,7 +54,7 @@ import { SingleRestaurantComponent } from './components/single-restaurant/single
     MatListModule,
     HttpClientModule,
     MatToolbarModule,
-    StoreModule.forRoot({ state: counterReducer }),
+    StoreModule.forRoot(reducers),
     MatButtonModule
   ],
   providers: [],

@@ -14,13 +14,19 @@ interface IRestaurants {
     address: string;
 }
 
-export const initialState = {
+export interface LocationState {
+    location: object;
+    restaurants: object[];
+    selectedRestaurant: object;
+}
+
+export const initialState: LocationState = {
     location: {},
     restaurants: [],
     selectedRestaurant: {}
 };
 
-export function counterReducer(state = initialState, action: Actions) {
+export function reducer(state = initialState, action: Actions) {
     switch (action.type) {
         case ActionTypes.setRestaurants: {
             state.restaurants.push(action.payload.restaurants);

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { setRestaurants, setCurrentLocation } from 'src/app/states/location.actions';
+import { setRestaurants, setCurrentLocation } from 'src/app/states/location/location.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ import { setRestaurants, setCurrentLocation } from 'src/app/states/location.acti
 export class LocationService {
   public filters: object[];
   state$: any;
-  constructor(private http: HttpClient, private store: Store<{ state: any }>) {
+  constructor(private http: HttpClient, private store: Store<{ locationState: any }>) {
     this.store.subscribe((val) => {
-      this.state$ = val.state
+      this.state$ = val.locationState
     });
   }
 
