@@ -9,10 +9,10 @@ import { setRestaurants, setCurrentLocation } from 'src/app/states/location/loca
 })
 export class LocationService {
   public filters: object[];
-  state$: any;
-  constructor(private http: HttpClient, private store: Store<{ locationState: any }>) {
+  public state: any;
+  constructor(private http: HttpClient, public store: Store<{ locationState: any }>) {
     this.store.subscribe((val) => {
-      this.state$ = val.locationState
+      this.state = val.locationState
     });
   }
 

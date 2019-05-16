@@ -1,7 +1,7 @@
-<agm-map *ngIf="state$.restaurants.length != 0" [zoom]="12" [latitude]="state$.selectedRestaurant.geometry.lat"
-  [longitude]="state$.selectedRestaurant.geometry.lng">
-  <agm-marker [latitude]="state$.selectedRestaurant.geometry.lat" [longitude]="state$.selectedRestaurant.geometry.lng"
+<agm-map *ngIf="state.restaurants.length != 0" [zoom]="12" [latitude]="state.selectedRestaurant.geometry.lat"
+  [longitude]="state.selectedRestaurant.geometry.lng">
+  <agm-marker [latitude]="state.selectedRestaurant.geometry.lat" [longitude]="state.selectedRestaurant.geometry.lng"
     [label]="'M'">
   </agm-marker>
 </agm-map>
-<app-spinner *ngIf="state$.restaurants.length == 0"></app-spinner>
+<app-spinner *ngIf="state.restaurants.length == 0"></app-spinner>

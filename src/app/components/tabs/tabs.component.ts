@@ -10,11 +10,9 @@ import { setRestaurants } from 'src/app/states/location/location.actions';
   styleUrls: ['./tabs.component.css']
 })
 export class TabsComponent implements OnInit {
-  state$: any;
-  constructor(private store: Store<{ locationState: any }>) {
-    this.store.subscribe((val) => {
-      this.state$ = val.locationState
-    });
+  state: any;
+  constructor(private locationService: LocationService) {
+    this.state = locationService.state;
   }
 
   ngOnInit() {

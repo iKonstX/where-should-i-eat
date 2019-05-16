@@ -24,15 +24,15 @@ interface IRestaurants {
 })
 export class MapComponent implements OnInit {
   selectedRestaurant: any;
-  state$: any;
-  constructor(private locationService: LocationService, private store: Store<{ locationState: any }>) {
+  state: any;
+  store: any;
+  constructor(private locationService: LocationService) {
+    this.state = locationService.state;
+    this.store = locationService.store;
   }
 
 
   ngOnInit() {
-    this.store.subscribe((val) => {
-      this.state$ = val.locationState
-    });
     this.loadMap()
   }
 
@@ -55,10 +55,10 @@ export class MapComponent implements OnInit {
   }
 
   public selectRandomRestaurant() {
-    const restaurantSize = this.state$.restaurants.length;
+    const restaurantSize = this.state.restaurants.length;
     const pickRestaurant = Math.floor(Math.random() * restaurantSize) + 1;
 
-    this.store.dispatch(new setSelectedRestaurant({ restaurant: this.state$.restaurants[pickRestaurant - 1] }))
+    this.store.dispatch(new setSelectedRestaurant({ restaurant: this.state.restaurants[pickRestaurant - 1] }))
   }
 
 }
