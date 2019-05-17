@@ -14,7 +14,8 @@ app.get('/', function (req, res) {
 
 app.get('/places', function (req, res) {
     const filters = { ...req.query };
-    ax.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=35.6580358,139.7275711&radius=5000&type=restaurant&key=${process.env.GMAP_API_KEY}`,
+    console.log(filters)
+    ax.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${filters.lat},${filters.lng}&radius=${filters.radius * 1000}&type=restaurant&key=${process.env.GMAP_API_KEY}`,
         {
             params: {
                 ...filters

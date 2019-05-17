@@ -22,6 +22,7 @@ export enum ELocationAccess {
 
 export interface LocationState {
     location: object;
+    filters: object;
     restaurants: object[];
     selectedRestaurant: object;
     locationAccess: ELocationAccess;
@@ -29,6 +30,7 @@ export interface LocationState {
 
 export const initialState: LocationState = {
     location: {},
+    filters: { radius: 1 },
     restaurants: [],
     selectedRestaurant: {},
     locationAccess: ELocationAccess.AWAIT
@@ -38,6 +40,10 @@ export function reducer(state = initialState, action: Actions) {
     switch (action.type) {
         case ActionTypes.setRestaurants: {
             state.restaurants.push(action.payload.restaurants);
+            return state;
+        }
+        case ActionTypes.setFilter: {
+            Object.assign(state.filters, action.payload.filter);
             return state;
         }
         case ActionTypes.setSelectedRestaurant: {

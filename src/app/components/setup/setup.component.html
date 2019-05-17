@@ -4,9 +4,9 @@
     <mat-card class="result">
       <mat-card-content>
         <h2 class="example-h2">How far away can the restaurant be?</h2>
-        <h4 class="example-h2">{{value}} kilometers from your current position</h4>
+        <h4 class="example-h2">{{locState.filters.radius}} kilometers from your current position</h4>
 
-        <mat-slider class="example-margin" [max]="max" [min]="min" [(ngModel)]="value">
+        <mat-slider class="example-margin" [max]="max" [min]="min" [(ngModel)]="locState.filters.radius">
         </mat-slider>
       </mat-card-content>
       <button mat-raised-button matStepperNext>Next</button>

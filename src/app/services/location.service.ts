@@ -56,7 +56,8 @@ export class LocationService {
   }
 
   public loadRestaurants() {
-    let params = new HttpParams().set("filter1", "1").set("paramName2", "paramValue2");
+    let params = new HttpParams().set("lat", String(this.state.location.lat)).set("lng", String(this.state.location.lng))
+      .set("radius", String(this.state.filters.radius));
     return this.http.get('http://localhost:3000/places', { params }).subscribe((res: any) => {
       res.forEach((restaurant: any) => {
         this.store.dispatch(new setRestaurants({

@@ -19,7 +19,6 @@ export class SetupComponent implements OnInit {
   ELocation = locationAccess;
   public stepState: any;
   public locState: any;
-  value = 0;
   min = 1;
   max = 50;
   enterManual = false;
@@ -38,7 +37,6 @@ export class SetupComponent implements OnInit {
 
   handleAddressChange(event) {
     this.locationService.setCurrentLocation({ latitude: event.geometry.location.lat(), longitude: event.geometry.location.lng() })
-    console.log(event.geometry.location.lng())
   }
 
   selectionChange(event: any) {
