@@ -4,10 +4,16 @@ import { SetupService } from '../../services/setup.service'
 import { LocationService } from '../../services/location.service'
 import { MatStepper } from '@angular/material/stepper';
 
-export enum locationAccess {
+export enum ELocation {
   AWAIT = 0,
   GRANTED = 1,
   DENIED = 2
+}
+
+export enum ERestaurants {
+  AWAIT = 0,
+  FOUND = 1,
+  NOTFOUND = 2
 }
 
 @Component({
@@ -16,11 +22,12 @@ export enum locationAccess {
   styleUrls: ['./setup.component.css']
 })
 export class SetupComponent implements OnInit {
-  ELocation = locationAccess;
+  ELocation = ELocation;
+  ERestaurant = ERestaurants;
   public stepState: any;
   public locState: any;
   min = 1;
-  max = 50;
+  max = 49;
   enterManual = false;
   constructor(private setupService: SetupService, private locationService: LocationService) {
     this.stepState = this.setupService.state;

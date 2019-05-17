@@ -20,12 +20,19 @@ export enum ELocationAccess {
     DENIED = 2
 }
 
+export enum ERestaurants {
+    AWAIT = 0,
+    FOUND = 1,
+    NOTFOUND = 2
+}
+
 export interface LocationState {
     location: object;
     filters: object;
     restaurants: object[];
     selectedRestaurant: object;
     locationAccess: ELocationAccess;
+    restaurantResult: ERestaurants;
 }
 
 export const initialState: LocationState = {
@@ -33,7 +40,8 @@ export const initialState: LocationState = {
     filters: { radius: 1 },
     restaurants: [],
     selectedRestaurant: {},
-    locationAccess: ELocationAccess.AWAIT
+    locationAccess: ELocationAccess.AWAIT,
+    restaurantResult: ERestaurants.AWAIT
 };
 
 export function reducer(state = initialState, action: Actions) {
@@ -56,6 +64,10 @@ export function reducer(state = initialState, action: Actions) {
         }
         case ActionTypes.setLocationAccess: {
             state.locationAccess = action.payload.access
+            return state
+        }
+        case ActionTypes.setRestaurantResult: {
+            state.restaurantResult = action.payload.result
             return state
         }
 

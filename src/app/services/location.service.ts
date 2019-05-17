@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { setRestaurants, setCurrentLocation, setSelectedRestaurant, setLocationAccess } from 'src/app/states/location/location.actions';
+import { setRestaurants, setCurrentLocation, setSelectedRestaurant, setLocationAccess, setRestaurantResult } from 'src/app/states/location/location.actions';
 import { setStep } from '../states/setup/setup.actions';
-import { ELocationAccess } from '../states/location/location.reducers';
+import { ELocationAccess, ERestaurants } from '../states/location/location.reducers';
 
 @Injectable({
   providedIn: 'root'
@@ -56,9 +56,16 @@ export class LocationService {
   }
 
   public loadRestaurants() {
+    this.store.dispatch(new setRestaurantResult({ result: ERestaurants.AWAIT }));
     let params = new HttpParams().set("lat", String(this.state.location.lat)).set("lng", String(this.state.location.lng))
       .set("radius", String(this.state.filters.radius));
     return this.http.get('http://localhost:3000/places', { params }).subscribe((res: any) => {
+      console.log(res)
+      if (res.length === 0) {
+        this.store.dispatch(new setRestaurantResult({ result: ERestaurants.NOTFOUND }));
+        return;
+      }
+
       res.forEach((restaurant: any) => {
         this.store.dispatch(new setRestaurants({
           restaurants: {

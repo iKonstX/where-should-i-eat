@@ -6,7 +6,8 @@ export enum ActionTypes {
     setCurrentLocation = '[Location Service] setCurrentLocation',
     setSelectedRestaurant = '[Location Service] setSelectedRestaurant',
     setLocationAccess = '[Location Service] setLocationAccess',
-    setFilter = '[Location Service] setFilter'
+    setFilter = '[Location Service] setFilter',
+    setRestaurantResult = '[Location Service] setRestaurantResult'
 }
 
 export class setRestaurants implements Action {
@@ -39,9 +40,16 @@ export class setFilter implements Action {
     constructor(public payload: { filter: any }) { }
 }
 
+export class setRestaurantResult implements Action {
+    readonly type = ActionTypes.setRestaurantResult;
+
+    constructor(public payload: { result: any }) { }
+}
+
 export type Actions =
     | setRestaurants
     | setCurrentLocation
     | setSelectedRestaurant
     | setLocationAccess
     | setFilter
+    | setRestaurantResult

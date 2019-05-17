@@ -29,15 +29,19 @@
           <input matInput placeholder="Enter your address" ngx-google-places-autocomplete [options]='options'
             #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)">
         </mat-form-field>
+        <button mat-raised-button (click)="toggleManual()">{{ !enterManual ? 'Change' : 'Go back'}}</button>
       </mat-card-content>
-      <button mat-raised-button *ngIf="!enterManual" (click)="toggleManual()">No (enter manually)</button>
+      <button mat-raised-button matStepperPrevious>Previous</button>
       <button mat-raised-button matStepperNext>Next</button>
     </mat-card>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Finishing</ng-template>
-    <app-spinner *ngIf="locState.restaurants.length === 0" [spinnerString]="'Loading restaurants...'">
+    <app-spinner *ngIf="locState.restaurantResult === ERestaurant.AWAIT" [spinnerString]="'Loading restaurants...'">
     </app-spinner>
-
+    <a *ngIf="locState.restaurantResult === ERestaurant.NOTFOUND">Couldn't find any restaurants with your search
+      criteria. Please try again.</a>
+    <button *ngIf="locState.restaurantResult === ERestaurant.NOTFOUND" mat-raised-button
+      matStepperPrevious>Previous</button>
   </mat-step>
 </mat-horizontal-stepper>
