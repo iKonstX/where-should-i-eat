@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 //3rd party
 import { AgmCoreModule } from '@agm/core';
@@ -10,6 +11,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatCardModule } from '@angular/material/card';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 // States
@@ -33,6 +37,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MapComponent } from './components/map/map.component';
 import { SingleRestaurantComponent } from './components/single-restaurant/single-restaurant.component';
+import { SetupComponent } from './components/setup/setup.component';
 
 
 @NgModule({
@@ -41,10 +46,12 @@ import { SingleRestaurantComponent } from './components/single-restaurant/single
     TabsComponent,
     SpinnerComponent,
     MapComponent,
-    SingleRestaurantComponent
+    SingleRestaurantComponent,
+    SetupComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAn19RJD6FC5aLwzr0AbsmzP4rmQjoJENU'
     }),
@@ -55,7 +62,10 @@ import { SingleRestaurantComponent } from './components/single-restaurant/single
     HttpClientModule,
     MatToolbarModule,
     StoreModule.forRoot(reducers),
-    MatButtonModule
+    MatButtonModule,
+    MatSliderModule,
+    MatCardModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

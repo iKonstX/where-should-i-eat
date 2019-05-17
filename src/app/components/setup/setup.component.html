@@ -1,0 +1,38 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <ng-template matStepLabel>Setup</ng-template>
+    <mat-card class="result">
+      <mat-card-content>
+        <h2 class="example-h2">How far away can the restaurant be?</h2>
+        <h4 class="example-h2">{{value}} kilometers from your current position</h4>
+
+        <mat-slider class="example-margin" [max]="max" [min]="min" [(ngModel)]="value">
+        </mat-slider>
+      </mat-card-content>
+      <button mat-raised-button (click)="nextStep(stepper)">Next</button>
+    </mat-card>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <ng-template matStepLabel>Location</ng-template>
+    <mat-card class="result">
+      <mat-card-content>
+        <h2 class="example-h2">Your Location</h2>
+        <a *ngIf="!locState.location.lat || !locState.location.lng">Couldn't retrieve address. Have you given us access
+          to read your location?</a>
+        <a *ngIf="locState.location.lat && locState.location.lng">Is {{locState.location.lat}} your correct address?</a>
+      </mat-card-content>
+      <button mat-raised-button (click)="prevStep(stepper)">No (enter manually)</button>
+      <button mat-raised-button (click)="loadRestaurants(stepper)">Yes</button>
+    </mat-card>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Finishing</ng-template>
+    <mat-card class="result">
+      <mat-card-content>
+        <h2 class="example-h2">Loading restaurants based on your search...</h2>
+        <app-spinner *ngIf="locState.restaurants.length === 0" [spinnerString]="'Retrieving location, please confirm.'">
+        </app-spinner>
+      </mat-card-content>
+    </mat-card>
+  </mat-step>
+</mat-horizontal-stepper>

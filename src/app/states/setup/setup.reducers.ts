@@ -11,10 +11,14 @@ enum Step {
 
 export interface SetupState {
     currentStep: Step;
+    isLoading: boolean;
+    loadingString: string;
 }
 
 export const initialState: SetupState = {
-    currentStep: Step.NONE
+    currentStep: Step.NONE,
+    isLoading: false,
+    loadingString: ""
 };
 
 export function reducer(state = initialState, action: Actions) {

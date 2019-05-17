@@ -33,32 +33,6 @@ export class MapComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loadMap()
-  }
-
-  loadMap() {
-    this.locationService.getCurrentLocation();
-    this.locationService.loadRestaurants().subscribe((res: any) => {
-      res.forEach((restaurant: any) => {
-        this.store.dispatch(new setRestaurants({
-          restaurants: {
-            geometry: restaurant.geometry.location,
-            icon: restaurant.icon,
-            name: restaurant.name,
-            isOpen: restaurant.opening_hours,
-            address: restaurant.vicinity
-          }
-        }));
-      })
-      this.selectRandomRestaurant();
-    });
-  }
-
-  public selectRandomRestaurant() {
-    const restaurantSize = this.state.restaurants.length;
-    const pickRestaurant = Math.floor(Math.random() * restaurantSize) + 1;
-
-    this.store.dispatch(new setSelectedRestaurant({ restaurant: this.state.restaurants[pickRestaurant - 1] }))
   }
 
 }

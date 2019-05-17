@@ -1,3 +1,9 @@
-<app-map></app-map>
-<app-tabs>
-</app-tabs>
+<div *ngIf="setupState.currentStep === 4">
+    <app-map></app-map>
+    <app-tabs>
+    </app-tabs>
+</div>
+<div *ngIf="setupState.currentStep < 4 && !setupState.isLoading">
+    <app-setup></app-setup>
+</div>
+<app-spinner *ngIf="setupState.isLoading"></app-spinner>

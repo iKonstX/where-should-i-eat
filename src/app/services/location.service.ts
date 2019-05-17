@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { setRestaurants, setCurrentLocation } from 'src/app/states/location/location.actions';
+import { setRestaurants, setCurrentLocation, setSelectedRestaurant } from 'src/app/states/location/location.actions';
+import { setStep } from '../states/setup/setup.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +30,34 @@ export class LocationService {
     }
     // TODO: message that geolocation not available
     else {
+      return false;
     }
   }
 
   public loadRestaurants() {
     let params = new HttpParams().set("filter1", "1").set("paramName2", "paramValue2");
-    return this.http.get('http://localhost:3000/places', { params })
+    return this.http.get('http://localhost:3000/places', { params }).subscribe((res: any) => {
+      res.forEach((restaurant: any) => {
+        this.store.dispatch(new setRestaurants({
+          restaurants: {
+            geometry: restaurant.geometry.location,
+            icon: restaurant.icon,
+            name: restaurant.name,
+            isOpen: restaurant.opening_hours,
+            address: restaurant.vicinity
+          }
+        }));
+      })
+      this.selectRandomRestaurant();
+    });
+  }
+
+  public selectRandomRestaurant() {
+    const restaurantSize = this.state.restaurants.length;
+    const pickRestaurant = Math.floor(Math.random() * restaurantSize) + 1;
+
+    this.store.dispatch(new setSelectedRestaurant({ restaurant: this.state.restaurants[pickRestaurant - 1] }))
+    this.store.dispatch(new setStep({ step: 4 }))
   }
 
 }
