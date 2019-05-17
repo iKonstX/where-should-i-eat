@@ -22,6 +22,7 @@ export class SetupComponent implements OnInit {
   value = 0;
   min = 1;
   max = 50;
+  enterManual = false;
   constructor(private setupService: SetupService, private locationService: LocationService) {
     this.stepState = this.setupService.state;
     this.locState = this.locationService.state;
@@ -29,6 +30,15 @@ export class SetupComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  toggleManual() {
+    this.enterManual = !this.enterManual;
+  }
+
+  handleAddressChange(event) {
+    this.locationService.setCurrentLocation({ latitude: event.geometry.location.lat(), longitude: event.geometry.location.lng() })
+    console.log(event.geometry.location.lng())
   }
 
   selectionChange(event: any) {

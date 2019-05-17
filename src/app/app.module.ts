@@ -14,6 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 
 // States
@@ -52,6 +54,7 @@ import { SetupComponent } from './components/setup/setup.component';
   imports: [
     BrowserModule,
     FormsModule,
+    GooglePlaceModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAn19RJD6FC5aLwzr0AbsmzP4rmQjoJENU'
     }),
@@ -65,7 +68,8 @@ import { SetupComponent } from './components/setup/setup.component';
     MatButtonModule,
     MatSliderModule,
     MatCardModule,
-    MatStepperModule
+    MatStepperModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

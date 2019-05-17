@@ -18,6 +18,18 @@ export class LocationService {
     });
   }
 
+  public async setCurrentLocation(loc) {
+    this.store.dispatch(new setCurrentLocation({
+      location: {
+        lat: loc.latitude,
+        lng: loc.longitude
+      }
+    }));
+    this.store.dispatch(new setLocationAccess({
+      access: ELocationAccess.GRANTED
+    }));
+  }
+
   public async getCurrentLocation() {
     if (navigator.geolocation) {
       return await navigator.geolocation.getCurrentPosition((response) => {

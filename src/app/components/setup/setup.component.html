@@ -17,16 +17,21 @@
     <mat-card class="result">
       <mat-card-content>
         <h2 class="example-h2">Your Location</h2>
-        <app-spinner *ngIf="locState.locationAccess === ELocation.AWAIT"
+        <app-spinner *ngIf="!enterManual && locState.locationAccess === ELocation.AWAIT"
           [spinnerString]="'Retrieving location, please confirm.'"></app-spinner>
-        <a *ngIf="locState.locationAccess === ELocation.DENIED">Couldn't
+        <a *ngIf="!enterManual && locState.locationAccess === ELocation.DENIED">Couldn't
           retrieve address. Have you given us access
           to read your location?</a>
-        <a *ngIf="locState.location.lat && locState.location.lng && ELocation.GRANTED">Is {{locState.location.lat}}
+        <a *ngIf="!enterManual && locState.location.lat && locState.location.lng && ELocation.GRANTED">Is
+          {{locState.location.lat}}
           your correct address?</a>
+        <mat-form-field class="example-full-width" *ngIf="enterManual">
+          <input matInput placeholder="Enter your address" ngx-google-places-autocomplete [options]='options'
+            #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)">
+        </mat-form-field>
       </mat-card-content>
-      <button mat-raised-button matStepperPrevious>No (enter manually)</button>
-      <button mat-raised-button matStepperNext>Yes</button>
+      <button mat-raised-button *ngIf="!enterManual" (click)="toggleManual()">No (enter manually)</button>
+      <button mat-raised-button matStepperNext>Next</button>
     </mat-card>
   </mat-step>
   <mat-step>
