@@ -14,16 +14,24 @@ interface IRestaurants {
     address: string;
 }
 
+export enum ELocationAccess {
+    AWAIT = 0,
+    GRANTED = 1,
+    DENIED = 2
+}
+
 export interface LocationState {
     location: object;
     restaurants: object[];
     selectedRestaurant: object;
+    locationAccess: ELocationAccess;
 }
 
 export const initialState: LocationState = {
     location: {},
     restaurants: [],
-    selectedRestaurant: {}
+    selectedRestaurant: {},
+    locationAccess: ELocationAccess.AWAIT
 };
 
 export function reducer(state = initialState, action: Actions) {
@@ -38,6 +46,10 @@ export function reducer(state = initialState, action: Actions) {
         }
         case ActionTypes.setCurrentLocation: {
             state.location = action.payload.location
+            return state
+        }
+        case ActionTypes.setLocationAccess: {
+            state.locationAccess = action.payload.access
             return state
         }
 

@@ -1,4 +1,4 @@
-<mat-horizontal-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper [linear]="true" #stepper (selectionChange)="selectionChange($event)">
   <mat-step [stepControl]="firstFormGroup">
     <ng-template matStepLabel>Setup</ng-template>
     <mat-card class="result">
@@ -9,7 +9,7 @@
         <mat-slider class="example-margin" [max]="max" [min]="min" [(ngModel)]="value">
         </mat-slider>
       </mat-card-content>
-      <button mat-raised-button (click)="nextStep(stepper)">Next</button>
+      <button mat-raised-button matStepperNext>Next</button>
     </mat-card>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
@@ -17,22 +17,22 @@
     <mat-card class="result">
       <mat-card-content>
         <h2 class="example-h2">Your Location</h2>
-        <a *ngIf="!locState.location.lat || !locState.location.lng">Couldn't retrieve address. Have you given us access
+        <app-spinner *ngIf="locState.locationAccess === ELocation.AWAIT"
+          [spinnerString]="'Retrieving location, please confirm.'"></app-spinner>
+        <a *ngIf="locState.locationAccess === ELocation.DENIED">Couldn't
+          retrieve address. Have you given us access
           to read your location?</a>
-        <a *ngIf="locState.location.lat && locState.location.lng">Is {{locState.location.lat}} your correct address?</a>
+        <a *ngIf="locState.location.lat && locState.location.lng && ELocation.GRANTED">Is {{locState.location.lat}}
+          your correct address?</a>
       </mat-card-content>
-      <button mat-raised-button (click)="prevStep(stepper)">No (enter manually)</button>
-      <button mat-raised-button (click)="loadRestaurants(stepper)">Yes</button>
+      <button mat-raised-button matStepperPrevious>No (enter manually)</button>
+      <button mat-raised-button matStepperNext>Yes</button>
     </mat-card>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Finishing</ng-template>
-    <mat-card class="result">
-      <mat-card-content>
-        <h2 class="example-h2">Loading restaurants based on your search...</h2>
-        <app-spinner *ngIf="locState.restaurants.length === 0" [spinnerString]="'Retrieving location, please confirm.'">
-        </app-spinner>
-      </mat-card-content>
-    </mat-card>
+    <app-spinner *ngIf="locState.restaurants.length === 0" [spinnerString]="'Loading restaurants...'">
+    </app-spinner>
+
   </mat-step>
 </mat-horizontal-stepper>

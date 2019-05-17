@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { setRestaurants, setCurrentLocation, setSelectedRestaurant } from 'src/app/states/location/location.actions';
+import { setRestaurants, setCurrentLocation, setSelectedRestaurant, setLocationAccess } from 'src/app/states/location/location.actions';
 import { setStep } from '../states/setup/setup.actions';
+import { ELocationAccess } from '../states/location/location.reducers';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,15 @@ export class LocationService {
             lng: response.coords.longitude
           }
         }));
-      });
+        this.store.dispatch(new setLocationAccess({
+          access: ELocationAccess.GRANTED
+        }));
+      },
+        (err) => {
+          this.store.dispatch(new setLocationAccess({
+            access: ELocationAccess.DENIED
+          }));
+        });
     }
     // TODO: message that geolocation not available
     else {
