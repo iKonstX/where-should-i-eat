@@ -1,5 +1,5 @@
 <mat-horizontal-stepper [linear]="true" #stepper (selectionChange)="selectionChange($event)">
-  <mat-step [stepControl]="firstFormGroup">
+  <mat-step>
     <ng-template matStepLabel>Setup</ng-template>
     <mat-card class="result">
       <mat-card-content>
@@ -12,7 +12,7 @@
       <button mat-raised-button matStepperNext>Next</button>
     </mat-card>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
+  <mat-step>
     <ng-template matStepLabel>Location</ng-template>
     <mat-card class="result">
       <mat-card-content>
