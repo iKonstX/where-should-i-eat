@@ -29,7 +29,7 @@
           <input matInput placeholder="Enter your address" ngx-google-places-autocomplete [options]='options'
             #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)">
         </mat-form-field>
-        <button mat-raised-button (click)="toggleManual()">{{ !enterManual ? 'Change' : 'Go back'}}</button>
+        <button mat-button (click)="toggleManual()">{{ !enterManual ? 'Change' : 'Go back'}}</button>
       </mat-card-content>
       <button mat-raised-button matStepperPrevious>Previous</button>
       <button mat-raised-button matStepperNext>Next</button>
