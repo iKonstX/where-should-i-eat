@@ -27,7 +27,7 @@ export class SetupComponent implements OnInit {
   public stepState: any;
   public locState: any;
   min = 1;
-  max = 49;
+  max = 50;
   enterManual = false;
   constructor(private setupService: SetupService, private locationService: LocationService) {
     this.stepState = this.setupService.state;

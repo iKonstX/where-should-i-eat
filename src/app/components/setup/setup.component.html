@@ -39,9 +39,12 @@
     <ng-template matStepLabel>Finishing</ng-template>
     <app-spinner *ngIf="locState.restaurantResult === ERestaurant.AWAIT" [spinnerString]="'Loading restaurants...'">
     </app-spinner>
-    <a *ngIf="locState.restaurantResult === ERestaurant.NOTFOUND">Couldn't find any restaurants with your search
-      criteria. Please try again.</a>
-    <button *ngIf="locState.restaurantResult === ERestaurant.NOTFOUND" mat-raised-button
-      matStepperPrevious>Previous</button>
+    <mat-card class="result" *ngIf="locState.restaurantResult === ERestaurant.NOTFOUND">
+      <mat-card-content>
+        <a>Couldn't find any restaurants with your search
+          criteria. Please try again.</a>
+      </mat-card-content>
+      <button mat-raised-button matStepperPrevious>Previous</button>
+    </mat-card>
   </mat-step>
 </mat-horizontal-stepper>
