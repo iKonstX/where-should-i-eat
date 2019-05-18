@@ -62,7 +62,7 @@ export class LocationService {
     let params = new HttpParams().set("lat", String(this.state.location.lat)).set("lng", String(this.state.location.lng))
       .set("radius", String(this.state.filters.radius));
 
-    return this.http.get('http://localhost:3000/places', { params }).subscribe((res: any) => {
+    return this.http.get('/places', { params }).subscribe((res: any) => {
       console.log(res)
       if (res.length === 0) {
         this.store.dispatch(new setRestaurantResult({ result: ERestaurants.NOTFOUND }));
