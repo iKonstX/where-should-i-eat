@@ -1,6 +1,6 @@
 <agm-map *ngIf="state.restaurants.length != 0" [zoom]="12" [latitude]="state.selectedRestaurant.geometry.lat"
   [longitude]="state.selectedRestaurant.geometry.lng">
-  <agm-marker [latitude]="state.selectedRestaurant.geometry.lat" [longitude]="state.selectedRestaurant.geometry.lng"
-    [label]="'M'">
-  </agm-marker>
+  <agm-direction [origin]="{lat: state.location.lat, lng: state.location.lng}"
+    [destination]="{lat: state.selectedRestaurant.geometry.lat, lng: state.selectedRestaurant.geometry.lng}">
+  </agm-direction>
 </agm-map>

@@ -13,7 +13,6 @@ app.get('/', function (req, res) {
 });
 
 app.get('/places', function (req, res) {
-    console.log(process.env.GMAP_API_KEY)
     const filters = { ...req.query };
     ax.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${filters.lat},${filters.lng}&radius=${filters.radius * 1000}&type=restaurant&key=${process.env.GMAP_API_KEY}`)
         .then((response) => {

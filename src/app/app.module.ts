@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { AgmDirectionModule } from 'agm-direction';   // agm-direction
 
 
 // States
@@ -58,6 +59,7 @@ import { SetupComponent } from './components/setup/setup.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAn19RJD6FC5aLwzr0AbsmzP4rmQjoJENU'
     }),
+    AgmDirectionModule,
     BrowserAnimationsModule,
     MatTabsModule,
     MatProgressSpinnerModule,

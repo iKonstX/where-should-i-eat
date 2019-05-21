@@ -29,6 +29,7 @@
     "@angular/router": "~7.2.0",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^7.4.0",
+    "agm-direction": "^0.7.6",
     "axios": "^0.18.0",
     "core-js": "^2.5.4",
     "dotenv": "^8.0.0",

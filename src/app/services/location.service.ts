@@ -63,7 +63,6 @@ export class LocationService {
       .set("radius", String(this.state.filters.radius));
 
     return this.http.get('/places', { params }).subscribe((res: any) => {
-      console.log(res)
       if (res.length === 0) {
         this.store.dispatch(new setRestaurantResult({ result: ERestaurants.NOTFOUND }));
         return;
